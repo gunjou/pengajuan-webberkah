@@ -1,6 +1,6 @@
 # Pengajuan Berkah Angsana
 
-Aplikasi web untuk pegawai Berkah Angsana membuat dan memantau pengajuan pembelian atau pembayaran. Aplikasi ini hanya mencakup peran pegawai dan terhubung ke backend Flask (`api-webberkah`).
+Aplikasi web untuk pegawai Berkah Angsana membuat dan memantau pengajuan pembelian atau pembayaran. Aplikasi ini hanya mencakup peran pegawai dan terhubung ke backend Flask (`api-webberkah`) lewat alamat di `.env`.
 
 ## Fitur
 
@@ -22,15 +22,13 @@ Aplikasi web untuk pegawai Berkah Angsana membuat dan memantau pengajuan pembeli
 
 ## Persiapan
 
-Butuh Node.js 22.13 atau lebih baru, dan backend Flask yang berjalan di `127.0.0.1:5000`.
+Butuh Node.js 22.13 atau lebih baru.
 
 ```bash
 npm install
 ```
 
-Buat dua file environment berikut di root proyek. Keduanya tidak masuk git.
-
-`.env`, dipakai saat build produksi:
+Buat file `.env` di root proyek. File ini tidak masuk git, dan dipakai saat development maupun build.
 
 ```dotenv
 VITE_API_BASE_URL=https://alamat-api
@@ -44,11 +42,7 @@ VITE_DOCUMENT_CATEGORY=
 VITE_DOCUMENT_API_KEY=
 ```
 
-`.env.development`, menimpa nilai di atas saat development supaya API lewat proxy Vite:
-
-```dotenv
-VITE_API_BASE_URL=/api
-```
+Aplikasi memanggil alamat di `VITE_API_BASE_URL` secara langsung, jadi `npm run dev` memakai data dari server tersebut.
 
 ## Menjalankan
 
@@ -59,8 +53,6 @@ npm run lint           # pemeriksaan kode
 npm run build          # build produksi ke dist/
 npm run preview        # melihat hasil build
 ```
-
-Saat development, `/api/*` diteruskan ke `http://127.0.0.1:5000` tanpa prefix `/api`. Alamat yang dipakai `127.0.0.1`, bukan `localhost`, karena di macOS `localhost:5000` bisa dijawab oleh AirPlay.
 
 ## Struktur
 
