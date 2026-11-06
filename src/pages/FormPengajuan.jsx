@@ -81,8 +81,12 @@ export default function FormPengajuan() {
   }, [dirty]);
 
   // Menjaga isian saat berpindah lewat navigasi, sidebar, atau tombol kembali.
+  // Logout sudah punya dialog konfirmasi sendiri, jadi tidak ditanya dua kali.
   const blocker = useBlocker(
-    () => dirtyRef.current && !window.confirm("Isian belum dikirim dan akan hilang. Tetap keluar?"),
+    ({ nextLocation }) =>
+      nextLocation.pathname !== "/login" &&
+      dirtyRef.current &&
+      !window.confirm("Isian belum dikirim dan akan hilang. Tetap keluar?"),
   );
   useEffect(() => {
     if (blocker.state === "blocked") blocker.reset();

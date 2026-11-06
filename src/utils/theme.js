@@ -1,9 +1,10 @@
 const STORAGE_KEY = "theme_color";
 
-export const DEFAULT_THEME = "#ff0000";
+export const DEFAULT_THEME = "#141416";
 
 export const THEME_PRESETS = [
-  { value: DEFAULT_THEME, label: "Merah" },
+  { value: DEFAULT_THEME, label: "Hitam" },
+  { value: "#ff0000", label: "Merah" },
   { value: "#a43cff", label: "Violet" },
   { value: "#2f6bff", label: "Biru" },
   { value: "#00a389", label: "Teal" },

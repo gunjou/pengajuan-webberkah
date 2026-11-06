@@ -26,7 +26,7 @@
 
 /* Nilai bawaan; diganti src/utils/theme.js sesuai pilihan pengguna */
 :root {
-  --brand: #ff0000;
+  --brand: #141416;
   --brand-on: #ffffff;
 }
 
@@ -146,7 +146,7 @@
   }
 }
 
-/* Satu-satunya gerak otomatis: tabung status terisi saat halaman dibuka */
+/* Tabung status terisi saat halaman dibuka */
 @keyframes tube-fill {
   from {
     transform: scaleX(0);
@@ -156,4 +156,27 @@
 @utility animate-tube-fill {
   transform-origin: left;
   animation: tube-fill 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Panah pada tombol berjalan bergantian; opacity awal mengikuti gaya tiap panah */
+@keyframes chevron-walk {
+  0%,
+  60%,
+  100% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+}
+
+@utility animate-chevron-walk {
+  animation: chevron-walk 1.4s ease-in-out infinite;
+}
+
+/* Mematikan tarik-untuk-refresh bawaan browser; diganti PullToRefresh */
+html,
+body {
+  overscroll-behavior-y: none;
 }
