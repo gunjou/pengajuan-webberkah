@@ -572,7 +572,7 @@ export default function FormPengajuan() {
                 className={`${PICKER_CLASS} hidden min-w-0 flex-1 pointer-coarse:flex ${busy ? "cursor-not-allowed opacity-60" : "cursor-pointer"}`}
               >
                 <Camera className="size-5 shrink-0" strokeWidth={1.5} />
-                Tangkap gambar
+                Buka Kamera
                 <input
                   type="file"
                   name="lampiran_kamera"
