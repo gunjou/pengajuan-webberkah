@@ -70,5 +70,5 @@ src/
 ## Catatan deploy
 
 - Semua rute harus diarahkan ke `index.html`, karena aplikasi memakai routing di sisi browser.
-- File `.mjs` harus disajikan sebagai JavaScript. Jika tidak, pratinjau PDF gagal.
+- Worker PDF.js dibuild sebagai file `.js`, sehingga tidak perlu konfigurasi MIME khusus untuk pratinjau PDF.
 - Semua nilai `VITE_*` ikut masuk ke kode yang dikirim ke browser, termasuk API key CDN. Pastikan izin key tersebut dibatasi.

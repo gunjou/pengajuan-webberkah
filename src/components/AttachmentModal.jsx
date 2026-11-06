@@ -67,7 +67,9 @@ export default function AttachmentModal({ attachment, onClose }) {
   const [failed, setFailed] = useState(false);
   const [zoomed, setZoomed] = useState(false);
   const handleFailed = useCallback(() => setFailed(true), []);
-  const unavailable = failed || (source.status === "ready" && source.kind === "other");
+  // Tanpa blob (mis. CORS) PDF.js tidak bisa membaca PDF, dan iframe umumnya kosong di HP.
+  const unavailable =
+    failed || (source.status === "ready" && (source.kind === "other" || (source.kind === "pdf" && !source.isBlob)));
 
   return (
     <Dialog
@@ -117,8 +119,17 @@ export default function AttachmentModal({ attachment, onClose }) {
             <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
               <FileWarning className="size-8 text-neutral-500" strokeWidth={1.5} />
               <p className="max-w-xs text-sm text-neutral-600">
-                File ini tidak bisa ditampilkan di sini. Buka di tab baru atau unduh filenya.
+                File ini tidak bisa ditampilkan di sini. Silakan buka langsung filenya.
               </p>
+              <a
+                href={attachment.path}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-primary-600 px-5 text-sm font-semibold text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+              >
+                <ExternalLink className="size-4" strokeWidth={1.5} />
+                Buka file
+              </a>
             </div>
           )}
 
@@ -140,13 +151,9 @@ export default function AttachmentModal({ attachment, onClose }) {
             </button>
           )}
 
-          {source.status === "ready" && !unavailable && source.kind === "pdf" &&
-            (source.isBlob ? (
-              <PdfViewer blob={source.blob} onError={handleFailed} />
-            ) : (
-              // File tidak bisa diambil (CORS), jadi hanya viewer browser yang bisa mencoba.
-              <iframe src={source.url} title={attachment.name} className="size-full border-0" />
-            ))}
+          {source.status === "ready" && !unavailable && source.kind === "pdf" && (
+            <PdfViewer blob={source.blob} onError={handleFailed} />
+          )}
         </div>
       </div>
     </Dialog>
