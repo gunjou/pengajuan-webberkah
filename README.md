@@ -32,14 +32,6 @@ Buat file `.env` di root proyek. File ini tidak masuk git, dan dipakai saat deve
 
 ```dotenv
 VITE_API_BASE_URL=https://alamat-api
-VITE_CDN_URL=https://alamat-cdn
-
-VITE_IMAGE_SERVICE_NAME=
-VITE_IMAGE_CATEGORY=
-VITE_IMAGE_API_KEY=
-
-VITE_DOCUMENT_CATEGORY=
-VITE_DOCUMENT_API_KEY=
 ```
 
 Aplikasi memanggil alamat di `VITE_API_BASE_URL` secara langsung, jadi `npm run dev` memakai data dari server tersebut.
@@ -58,7 +50,7 @@ npm run preview        # melihat hasil build
 
 ```text
 src/
-  api/         pemanggilan API dan upload CDN
+  api/         pemanggilan API
   assets/      logo
   components/  komponen UI
   hooks/       hook data dan filter
@@ -71,4 +63,4 @@ src/
 
 - Semua rute harus diarahkan ke `index.html`, karena aplikasi memakai routing di sisi browser.
 - Worker PDF.js dibuild sebagai file `.js`, sehingga tidak perlu konfigurasi MIME khusus untuk pratinjau PDF.
-- Semua nilai `VITE_*` ikut masuk ke kode yang dikirim ke browser, termasuk API key CDN. Pastikan izin key tersebut dibatasi.
+- Semua nilai `VITE_*` ikut masuk ke kode yang dikirim ke browser, jadi jangan menaruh rahasia di sana.

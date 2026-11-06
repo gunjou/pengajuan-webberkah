@@ -73,7 +73,9 @@ export async function request(path, options = {}) {
   });
   const queryString = query.toString();
 
-  const headers = { "Content-Type": "application/json" };
+  // FormData: Content-Type diisi browser agar boundary multipart ikut terkirim.
+  const isFormData = body instanceof FormData;
+  const headers = isFormData ? {} : { "Content-Type": "application/json" };
   const token = tokenStore.get();
   if (token) headers.Authorization = `Bearer ${token}`;
 
@@ -84,7 +86,7 @@ export async function request(path, options = {}) {
       {
         method,
         headers,
-        body: body === undefined ? undefined : JSON.stringify(body),
+        body: body === undefined || isFormData ? body : JSON.stringify(body),
       },
     );
   } catch {
